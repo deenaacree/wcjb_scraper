@@ -24,7 +24,7 @@ for div in linkList:
     bsObj = BeautifulSoup(html, "html.parser")
 
 
-    headline = bsObj.findAll("h2", attrs={'class' : 'pane-title'})
+    headline = bsObj.findAll("h2", attrs={'class' : 'pane-title'}, limit=1)
     text = bsObj.findAll("p", limit=3)
     print(new_url, headline, text)
     n.write(new_url + str(headline) + str(text) + "\n")
@@ -41,9 +41,9 @@ def email():
     to = 'acreedeena@gmail.com'
     subject = "Your WCJB Local News for Today"
     body = 'This is the Latest in Local News from WCJB for today. Find more news <a href="http://www.wcjb.com/local-news">here</a>.'
-    file = 'local/wcjb_scraper2.txt'
 
-    yag.send(to, subject, contents = [body, file])
+
+    yag.send(to, subject, contents = [body, 'file://local/wcjb_scraper2.txt'])
 
     # use this line if only testing the function once:
     # return schedule.CancelJob
