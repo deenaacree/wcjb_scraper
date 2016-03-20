@@ -49,16 +49,16 @@ To use schedule, I put the yagmail code into a function, `email`, which I then t
 
 #### Step 5: Scraping WCJB for Links
 Since I already discovered where the links were on the page (when I was gathering background information), I needed to set up my scraper to actually get the links in that div. In order to do this, I had to:
-1. Find all of the `div` elements with the `class` of `views-content-title`.
-2. Find all of the links in this `div` -- by finding all of the `a` tags and taking the `href` element out of it (figuring this out took the longest of the entire project.)
-3. Store the new links in a file (this is not necessary, but it makes knowing what links were scraped easier).
+- 1. Find all of the `div` elements with the `class` of `views-content-title`.
+- 2. Find all of the links in this `div` -- by finding all of the `a` tags and taking the `href` element out of it (figuring this out took the longest of the entire project.)
+- 3. Store the new links in a file (this is not necessary, but it makes knowing what links were scraped easier).
 This is done with the `p.write()` command. The links are written into the file `wcjb_scraper.txt`.
 
 #### Step 6: Scraping Headlines and Paragraphs
 After scraping the latest news links, I needed to go to those stories and scrape the headline and the first two paragraphs of the story. To do this, I had to:
-1. Find the **first** `h2` on the page with the `class` of `pane-title` (I assumed that there would only be one of these, but I was very wrong.)
-2. Find the text for the first **three** `p` tags (the site uses an empty `p` tag for spaces betweek paragraphs, so to get the first two paragraphs I needed to grab the first three tags).
-3. Store the new links, headline, and paragraphs all in a file (this **is** necessary for this part).
+- 1. Find the **first** `h2` on the page with the `class` of `pane-title` (I assumed that there would only be one of these, but I was very wrong.)
+- 2. Find the text for the first **three** `p` tags (the site uses an empty `p` tag for spaces betweek paragraphs, so to get the first two paragraphs I needed to grab the first three tags).
+- 3. Store the new links, headline, and paragraphs all in a file (this **is** necessary for this part).
 This is done with the `n.write()` command. The links are written into the file `wcjb_scraper.txt`.
 I wanted to make this part of the project a separate function, but I quickly discovered that it was much easier to get each story's information as that link was written (otherwise, I had to try and create new variables and lists using the same words -- it got very confusing, very quickly).
 
