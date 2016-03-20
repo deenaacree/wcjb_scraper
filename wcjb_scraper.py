@@ -17,30 +17,33 @@ for div in linkList:
     print(div.find('a')['href'])
     p.write("http://www.wcjb.com" + str(div.find('a')['href']) + "\n")
 
-p.close()
-
-
-for links in div:
-    new_url = links
+    location = div.find('a')['href']
+    prefix = "http://www.wcjb.com"
+    new_url = "http://www.wcjb.com" + str(location)
     html = urlopen(new_url)
     bsObj = BeautifulSoup(html, "html.parser")
 
-    for links in newList:
-        # this line is to make sure that the links are being written without opening the file
-        print(div.find('a')['href'])
-        n.write("http://www.wcjb.com" + str(div.find('a')['href']) + "\n")
 
+    headline = bsObj.findAll("h2", attrs={'class' : 'pane-title'})
+    text = bsObj.findAll("p", limit=3)
+    print(new_url, headline, text)
+    n.write(new_url + str(headline) + str(text) + "\n")
+
+
+p.close()
 n.close()
 
+
+# everything above this currently works correctly
 
 def email():
     yag = yagmail.SMTP('acreedeena')
     to = 'acreedeena@gmail.com'
     subject = "Your WCJB Local News for Today"
     body = 'This is the Latest in Local News from WCJB for today. Find more news <a href="http://www.wcjb.com/local-news">here</a>.'
-    html = '<h2><a href="">Headline goes here</a></h2><p>This is the story p1.</p><p>This is the story p2.</p>'
+    file = 'local/wcjb_scraper2.txt'
 
-    yag.send(to, subject, contents = [body, html])
+    yag.send(to, subject, contents = [body, file])
 
     # use this line if only testing the function once:
     # return schedule.CancelJob
